@@ -1,0 +1,104 @@
+quoteImportJsonWrapper quoteWrap = new quoteImportJsonWrapper();
+quoteImportJsonWrapper.Quote quote = new quoteImportJsonWrapper.Quote();
+quoteImportJsonWrapper.Client client = new quoteImportJsonWrapper.Client();
+quoteImportJsonWrapper.QuoteSetup quoteSetup = new quoteImportJsonWrapper.QuoteSetup();
+quoteImportJsonWrapper.Document document = new quoteImportJsonWrapper.Document();
+quoteImportJsonWrapper.clientBusinessInfo clientBusinessInfo = new quoteImportJsonWrapper.clientBusinessInfo();
+quoteImportJsonWrapper.organization organization = new quoteImportJsonWrapper.organization();
+quoteImportJsonWrapper.generalInfo generalInfo = new quoteImportJsonWrapper.generalInfo();
+quoteImportJsonWrapper.stakeholder stakeholder = new quoteImportJsonWrapper.stakeholder();
+quoteImportJsonWrapper.producer producer = new quoteImportJsonWrapper.producer();
+quoteImportJsonWrapper.agency agency = new quoteImportJsonWrapper.agency();
+    
+    
+    
+    
+client.createdDate = '2022-03-28';
+client.policyDate = '2022-03-28';
+client.status = 'NB';
+client.fullName ='Rating Test Case 4 - MB';
+client.industryCode = '1011' ;
+client.externalId ='1402';
+client.clientBusinessInfo = clientBusinessInfo;
+client.organization = organization;
+
+producer.firstName = 'test';
+producer.lastName = 'iqx5';
+producer.producerCode = '258AW';
+producer.agency = agency;
+
+agency.agencyName = 'test agency';    
+    
+clientBusinessInfo.collarMix = 'mixed';
+   
+organization.confidentialClient = false;
+organization.situsState = 'NB';
+organization.situsZip = 'E1H 2E7';
+   
+
+quoteSetup.segment = 'SNR';
+quoteSetup.multiDivisions = true;
+quoteSetup.multiOptions = false;
+quoteSetup.autoMapDivCls = true;
+quoteSetup.experienceHistory = true;
+quoteSetup.autoCalcGroups = 'benDefRate';
+quoteSetup.noProducer = true;
+quoteSetup.rateHistory = false;
+
+
+
+generalInfo.neededDate = '2021-05-20';
+generalInfo.receivedDate = '2021-05-17';
+generalInfo.effectiveDate = '2022-06-01';
+
+
+stakeholder.underwritingTeam = 'uwTeamSG';
+stakeholder.underwritingTeam2 = 'uwTeamSG';
+stakeholder.salesRep = 'jefflippens';
+stakeholder.financialAnalyst = 'ChunmingL';
+stakeholder.salesSupRep = 'jimbrown';
+
+
+generalInfo.stakeholder = stakeholder;
+   
+quote.status = 'salesInfoGatheringInternal';
+quote.producer = producer;
+quote.client = client;
+quote.quoteSetup = quoteSetup;
+quote.generalInfo = generalInfo;
+
+document.quote = quote;
+
+quoteWrap.document = document;
+
+String jsonbody = System.JSON.serialize(quoteWrap);
+
+System.debug('jsonbody==='+jsonbody);
+
+quoteImportJsonWrapper wrsp = quoteImportJsonWrapper.parse(jsonbody);
+System.debug('wrsp==='+wrsp);
+GIQXTokenManager manager = new GIQXTokenManager(false);
+        //manager.IsRunningInASandbox = true;
+       String accessToken =  manager.getAccessToken();
+
+System.debug('accessToken==='+accessToken);
+
+
+
+String endpoint = '' ;
+Httprequest request = new HttpRequest();
+Http http = new Http();
+HttpResponse response;
+request.setEndpoint(endpoint);
+//request.setMethod('GET');
+request.setMethod('PUT');
+//req.setHeader('Content-Type',ENCODING_JSON);
+//request.setHeader('Content-Type','application/x-www-form-urlencoded');
+request.setHeader('Consumer-Key','8QzTq0DET9nLlQmrfqARgGY4N8cGUM9d');
+//request.setHeader('Consumer-Secret','');
+request.setHeader('Authorization','Bearer '+accessToken);
+
+request.setBody(jsonbody);
+response = http.send(request);
+System.debug('body:' + response.getBody());
+
