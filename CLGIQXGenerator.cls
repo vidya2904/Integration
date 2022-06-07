@@ -4,11 +4,11 @@ public class CLGIQXGenerator {
 
      //@TestVisible private static final String ISSUER = '6Cel800D4c0000008aRL8884c000000044x6mVmSaGke9nLuM0QLnPKy8sffN3ZXfXaeTsJuILLNii1KaH1ZToAt4g0LHTQlcsG77fGkwew';//'https://fit-lifeco.cs148.force.com/identity"';
     @TestVisible private static final String ISSUER = 'https://devims1-lifeco.cs99.force.com/identity' ;
-    @TestVisible private static final String HOSTNAME = 'https://test-api.canadalife.com';
+    @TestVisible private static final String HOSTNAME = 'https://test-api.cl.com';
     @TestVisible private static final Integer TOKEN_VALIDITY_DURATION_SECONDS = 300;
     @TestVisible private static final String USERID_CLAIMS_KEY = 'userId';
     @TestVisible private static final String ROLES_CLAIMS_KEY = 'roles';
-    private static final String DEFAULT_CERTIFICATE_NAME = 'certificate_identity_provider_london_life';
+    private static final String DEFAULT_CERTIFICATE_NAME = 'certificate_identity_provider';
 
     @TestVisible
     private String CertificateName {
