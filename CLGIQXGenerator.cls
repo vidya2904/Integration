@@ -1,9 +1,4 @@
-/*********************************************************************************************
-*   Purpose: This class generates valid JWT token specific to the IMS project
-*   
-*   @ChangeLog 
-*   Date        User                 Description
-*   2020-05-06  Kuldeep Chauhan      Initial Implementation
+
 **********************************************************************************************/
 public class CLGIQXGenerator {
 
